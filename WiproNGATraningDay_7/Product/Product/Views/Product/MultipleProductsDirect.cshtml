@@ -1,0 +1,28 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model List<Product.Models.ProductModel>
+
+<h2>Multiple Products (Direct)</h2>
+
+<table border="1">
+    <tr>
+        <th>PCode</th>
+        <th>Name</th>
+        <th>Qty In Stock</th>
+        <th>Details</th>
+        <th>Price</th>
+    </tr>
+    @foreach (var product in Model)
+    {
+        <tr>
+            <td>@product.PCode</td>
+            <td>@product.Name</td>
+            <td>@product.QtyInStock</td>
+            <td>@product.Details</td>
+            <td>₹@product.Price</td>
+        </tr>
+    }
+</table>

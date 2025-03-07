@@ -1,0 +1,15 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@{
+    var product = ViewBag.Product;
+}
+
+<h2>Single Product (ViewBag)</h2>
+<p><strong>PCode:</strong> @product.PCode</p>
+<p><strong>Name:</strong> @product.Name</p>
+<p><strong>Qty In Stock:</strong> @product.QtyInStock</p>
+<p><strong>Details:</strong> @product.Details</p>
+<p><strong>Price:</strong> ₹@product.Price</p>
