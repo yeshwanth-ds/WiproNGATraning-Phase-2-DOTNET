@@ -1,0 +1,14 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model EmployeeManagement.Models.Employee
+
+<h2>Edit Employee</h2>
+<form method="post">
+    <input type="hidden" name="ID" value="@Model.ID" />
+    Name: <input type="text" name="Name" value="@Model.Name" /><br />
+    Dept: <input type="text" name="Dept" value="@Model.Dept" /><br />
+    <button type="submit">Update</button>
+</form>

@@ -1,0 +1,75 @@
+# Visual Studio cache & temp files
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.sdf
+*.cache
+*.log
+
+# Build artifacts
+bin/
+obj/
+out/
+*.exe
+*.dll
+*.pdb
+*.ilk
+*.idb
+*.lib
+*.ncb
+*.map
+*.pch
+*.res
+*.exp
+
+# Entity Framework Migrations (optional)
+Migrations/
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# ASP.NET Core environment files
+appsettings.Development.json
+appsettings.Production.json
+appsettings.Local.json
+
+# Logs & debugging files
+logs/
+*.log
+*.tlog
+*.cachefile
+*.dmp
+
+# IDE Files (JetBrains Rider, Visual Studio Code)
+.idea/
+*.code-workspace
+
+# Dependencies
+node_modules/
+bower_components/
+libman.json
+
+# Coverage & Testing
+TestResults/
+*.coverage
+*.testlog
+
+# Database files
+*.mdf
+*.ldf
+*.sqlite
+*.db
+
+# Docker
+docker-compose.override.yml
+.dockerignore
+
+# Other
+Thumbs.db
+Desktop.ini
