@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
+using System.Security.Claims;
+using Microsoft.IdentityModel.Tokens;
+
 
 namespace BatchWebApi.Controllers
 {
@@ -33,26 +36,39 @@ namespace BatchWebApi.Controllers
             return response;
 
         }
-        
 
 
 
 
-    private string GenerateJSONWebToken(User user)
+
+        private string GenerateJSONWebToken(User user)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
-            var token = new JwtSecurityToken(_configuration["Jwt:Issuer"],
-              _configuration["Jwt:Audience"],
-              null,
-              expires: DateTime.Now.AddMinutes(120),
-              signingCredentials: credentials);
+            // 🔹 Add Claims (including User ID)
+            var claims = new List<Claim>
+    {
+        new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()), // ✅ Add User ID
+        new Claim(JwtRegisteredClaimNames.Email, user.Email), // Optional: Add email
+        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()), // Unique token ID
+        new Claim(JwtRegisteredClaimNames.Iss, _configuration["Jwt:Issuer"]),
+        new Claim(JwtRegisteredClaimNames.Aud, _configuration["Jwt:Audience"]),
+    };
+
+            var token = new JwtSecurityToken(
+                issuer: _configuration["Jwt:Issuer"],
+                audience: _configuration["Jwt:Audience"],
+                claims: claims, // ✅ Attach claims
+                expires: DateTime.UtcNow.AddMinutes(120),
+                signingCredentials: credentials
+            );
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-        
+
+
     }
 
 }

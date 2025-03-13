@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BatchWebApi.Context;
 using BatchWebApi.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BatchWebApi.Controllers
 {
@@ -105,5 +106,19 @@ namespace BatchWebApi.Controllers
         {
             return _context.Users.Any(e => e.Id == id);
         }
+
+        [Authorize]
+        [HttpGet("current")]
+        public async Task<ActionResult<User>> GetCurrentUser()
+        {
+            var userId = User.Claims.FirstOrDefault(c => c.Type == "id")?.Value;
+            if (userId == null) return Unauthorized();
+
+            var user = await _context.Users.FindAsync(int.Parse(userId));
+            if (user == null) return NotFound();
+
+            return user;
+        }
+
     }
 }
